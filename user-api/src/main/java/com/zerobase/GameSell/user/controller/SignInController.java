@@ -1,0 +1,29 @@
+package com.zerobase.GameSell.user.controller;
+
+import com.zerobase.GameSell.user.application.SignInApplication;
+import com.zerobase.GameSell.user.domain.SignInForm;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(value = "/signIn")
+@RequiredArgsConstructor
+public class SignInController {
+
+  private final SignInApplication signInApplication;
+
+  @PostMapping("/user")
+  public ResponseEntity<String> signInCustomer(@RequestBody SignInForm form) {
+    return ResponseEntity.ok(signInApplication.userLoginToken(form));
+  }
+
+  @PostMapping("/seller")
+  public ResponseEntity<String> signInSeller(@RequestBody SignInForm form) {
+    return ResponseEntity.ok(signInApplication.sellerLoginToken(form));
+  }
+
+}
