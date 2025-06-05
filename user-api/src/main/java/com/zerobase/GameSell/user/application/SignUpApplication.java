@@ -47,7 +47,7 @@ public class SignUpApplication {
           .build();
       log.info("Send email result : " + mailgunClient.sendEmail(sendMailForm).getBody());
 
-      signUpUserService.changeUserValidateEmail(c.getId(), code);
+      signUpUserService.changeUserVerifyExpiredDateTime(c.getId(), code);
       return "회원 가입에 성공하였습니다.";
     }
   }
@@ -59,7 +59,7 @@ public class SignUpApplication {
   private String getVerificationEmailBody(String email, String code) {
     StringBuilder builder = new StringBuilder();
     return builder.append("Hello ").append("! Please Click Link for verification\n\n")
-        .append("http://localhost:8082/signup/verify/user?email=")
+        .append("http://localhost:8081/signup/verify/user?email=")
         .append(email)
         .append("&code=")
         .append(code).toString();

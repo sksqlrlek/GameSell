@@ -19,7 +19,7 @@ public class UserService {
 
   public Optional<User> findValidUser(String email, String password) {
     return userRepository.findByEmail(email).stream()
-        .filter(user -> user.getPassword().equals(password) && user.isVerify())
+        .filter(user -> user.getPassword().equals(password) && user.getVerifiedAt() != null)
         .findFirst();
   }
 }

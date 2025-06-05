@@ -4,6 +4,7 @@ import com.zerobase.GameSell.user.application.SignUpApplication;
 import com.zerobase.GameSell.user.domain.SignUpForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,7 @@ public class SignUpController {
     return ResponseEntity.ok(signUpApplication.userSignUp(form));
   }
 
-  @PutMapping("/verify/user")
+  @GetMapping("/verify/user")
   public ResponseEntity<String> verifyCustomer(String email, String code) {
     signUpApplication.userVerify(email, code);
     return ResponseEntity.ok("인증이 완료되었습니다.");
