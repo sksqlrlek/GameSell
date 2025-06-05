@@ -33,7 +33,7 @@
 
 
 ## ERD
-![GameSell (4)](https://github.com/user-attachments/assets/2745f3f2-9270-4ae6-b108-7c1e1e3e75e8)
+![GameSell (5)](https://github.com/user-attachments/assets/1472c9a1-e22d-4d3e-bef6-081832e650dd)
 
 
 ## Tech Stack
