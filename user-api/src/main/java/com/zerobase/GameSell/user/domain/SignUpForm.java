@@ -1,6 +1,8 @@
 package com.zerobase.GameSell.user.domain;
 
 import com.user.gamedomain.domain.common.UserType;
+import com.zerobase.GameSell.user.domain.model.Gender;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,8 +16,8 @@ public class SignUpForm {
 
   private String email;
   private String password;
-  private int age;
-  private String gender;
+  private LocalDate birthDate;
+  private Gender gender;
   private UserType role;
 
   // seller 전용 필드

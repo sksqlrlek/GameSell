@@ -33,29 +33,23 @@ public class SignUpUserService {
 
   @Transactional
   public void verifyEmail(String email, String code) {
-    User user = userRepository.findByEmail(email)
+    User user = userRepository.findByEmail(email.toLowerCase(Locale.ROOT))
         .orElseThrow(() -> new UserException(NOT_FOUND_USER));
-    if (user.isVerify()) {
+    if (user.getVerifiedAt() != null) {
       throw new UserException(ALREADY_VERIFY);
     } else if (!user.getVerificationCode().equals(code)) {
       throw new UserException(WRONG_VERIFICATION);
     } else if (user.getVerifyExpiredAt().isBefore(LocalDateTime.now())) {
       throw new UserException(EXPIRE_CODE);
     }
-    user.setVerify(true);
+    user.setVerifiedAt(LocalDateTime.now());
   }
 
   @Transactional
-  public LocalDateTime changeUserValidateEmail(Long userId, String verificationCode) {
-    Optional<User> UserOptional = userRepository.findById(userId);
-
-    if (UserOptional.isPresent()) {
-      User user = UserOptional.get();
-      user.setVerificationCode(verificationCode);
-      user.setVerifyExpiredAt(LocalDateTime.now().plusDays(1));
-      return user.getVerifyExpiredAt();
-    }
-    //todo : 예외 처리
-    throw new UserException(NOT_FOUND_USER);
+  public LocalDateTime changeUserVerifyExpiredDateTime(Long userId, String verificationCode) {
+    User user = userRepository.findById(userId).orElseThrow(() -> new UserException(NOT_FOUND_USER));
+    user.setVerificationCode(verificationCode);
+    user.setVerifyExpiredAt(LocalDateTime.now().plusDays(1));
+    return user.getVerifyExpiredAt();
   }
 }

@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @ServletComponentScan
 @EnableFeignClients
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.zerobase.GameSell.user", "com.user.gamedomain"})
 @EnableJpaAuditing
 @EnableJpaRepositories
 @RequiredArgsConstructor

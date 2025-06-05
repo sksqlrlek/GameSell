@@ -67,6 +67,8 @@ dependencies {
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
   testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
 
+  implementation 'javax.xml.bind:jaxb-api:2.3.1'
+
 }
 
 dependencyManagement {

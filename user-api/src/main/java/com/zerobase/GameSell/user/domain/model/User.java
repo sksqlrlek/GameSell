@@ -9,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import lombok.AllArgsConstructor;
@@ -36,24 +37,25 @@ public class User extends BaseEntity {
   @Column(nullable = false, length = 50)
   private String password;
   @Column(nullable = false)
-  private int age;
+  private LocalDate birthDate;
+  @Enumerated(EnumType.STRING)
   @Column(nullable = false, length = 1)
-  private String gender;
+  private Gender gender;
   @Enumerated(EnumType.STRING)
   private UserType role;
 
   private LocalDateTime verifyExpiredAt;
   private String verificationCode;
-  private boolean verify;
+  private LocalDateTime verifiedAt;
 
   public static User from(SignUpForm form) {
     return User.builder()
         .email(form.getEmail().toLowerCase(Locale.ROOT))
         .password(form.getPassword())
-        .age(form.getAge())
+        .birthDate(form.getBirthDate())
         .gender(form.getGender())
         .role(form.getRole())
-        .verify(false)
+        .verifiedAt(null)
         .build();
   }
 
