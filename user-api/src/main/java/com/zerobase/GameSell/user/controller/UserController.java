@@ -3,8 +3,9 @@ package com.zerobase.GameSell.user.controller;
 import static com.zerobase.GameSell.user.exception.ErrorCode.NOT_FOUND_USER;
 
 import com.user.gamedomain.config.JwtAuthenticationProvider;
+import com.user.gamedomain.domain.Dto.UserDto;
 import com.user.gamedomain.domain.common.UserVo;
-import com.zerobase.GameSell.user.domain.Dto.UserDto;
+import com.zerobase.GameSell.user.domain.UserDtoMapper;
 import com.zerobase.GameSell.user.domain.model.User;
 import com.zerobase.GameSell.user.exception.UserException;
 import com.zerobase.GameSell.user.service.UserService;
@@ -30,7 +31,7 @@ public class UserController {
     User c = userService.findByIdAndEmail(vo.getId(), vo.getEmail()).orElseThrow(
         () -> new UserException(NOT_FOUND_USER));
 
-    return ResponseEntity.ok(UserDto.from(c));
+    return ResponseEntity.ok(UserDtoMapper.from(c));
   }
 
 }

@@ -2,11 +2,9 @@ package com.zerobase.GameSell.user.service;
 
 import static com.zerobase.GameSell.user.exception.ErrorCode.NOT_FOUND_USER;
 
-import com.zerobase.GameSell.user.domain.Dto.SellerDto;
 import com.zerobase.GameSell.user.domain.SignUpForm;
 import com.zerobase.GameSell.user.domain.model.Seller;
 import com.zerobase.GameSell.user.domain.repository.SellerRepository;
-import com.zerobase.GameSell.user.exception.UserException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
