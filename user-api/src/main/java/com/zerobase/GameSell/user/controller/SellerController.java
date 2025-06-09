@@ -3,9 +3,10 @@ package com.zerobase.GameSell.user.controller;
 import static com.zerobase.GameSell.user.exception.ErrorCode.NOT_FOUND_USER;
 
 import com.user.gamedomain.config.JwtAuthenticationProvider;
+import com.user.gamedomain.domain.Dto.SellerDto;
 import com.user.gamedomain.domain.common.UserVo;
-import com.zerobase.GameSell.user.domain.Dto.SellerDto;
 import com.zerobase.GameSell.user.domain.model.Seller;
+import com.zerobase.GameSell.user.domain.repository.SellerDtoMapper;
 import com.zerobase.GameSell.user.exception.UserException;
 import com.zerobase.GameSell.user.service.SellerService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,6 @@ public class SellerController {
     UserVo vo = provider.getUserVo(token);
     Seller seller = sellerService.findById(vo.getId())
         .orElseThrow(() -> new UserException(NOT_FOUND_USER));
-    return ResponseEntity.ok(SellerDto.from(seller));
+    return ResponseEntity.ok(SellerDtoMapper.from(seller));
   }
 }
