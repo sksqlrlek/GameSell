@@ -1,4 +1,4 @@
-package com.zerobase.GameSell.user.domain;
+package com.zerobase.GameSell.user.domain.repository;
 
 import com.user.gamedomain.domain.Dto.UserDto;
 import com.zerobase.GameSell.user.domain.model.User;
