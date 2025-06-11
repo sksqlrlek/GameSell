@@ -33,7 +33,7 @@ public class SellerGameController {
 
   @DeleteMapping
   public ResponseEntity<Void> deleteGame(@RequestHeader(name = "X-AUTH-TOKEN") String token,
-                                            @RequestParam Long id) {
+                                            @PathVariable Long id) {
     gameService.deleteGame(provider.getUserVo(token).getId(), id);
     return ResponseEntity.ok().build();
   }

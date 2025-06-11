@@ -11,10 +11,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ServletComponentScan
 @EnableJpaRepositories(repositoryFactoryBeanClass = EnversRevisionRepositoryFactoryBean.class)
 @EnableJpaAuditing
+@EnableFeignClients(basePackages = "com.zerobase.gamesell.order.client")
 @SpringBootApplication(scanBasePackages = {
         "com.zerobase.gamesell.order",
         "com.user.gamedomain" // ✅ 추가
-})@EnableFeignClients
+})
+
 public class ZeroOrderApplication {
   public static void main(String[] args) {
     SpringApplication.run(ZeroOrderApplication.class, args);

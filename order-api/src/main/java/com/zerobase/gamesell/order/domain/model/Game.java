@@ -48,7 +48,7 @@ public class Game extends BaseEntity{
   private Genre genre;
 
   @Column(nullable = false)
-  private Integer age;
+  private Integer contentRating;
 
   @Column(name = "release_date", nullable = false)
   private LocalDate releaseDate;
@@ -59,7 +59,7 @@ public class Game extends BaseEntity{
        .description(form.getDescription())
        .price(form.getPrice())
        .genre(form.getGenre())
-       .age(form.getAge())
+       .contentRating(form.getContentRating())
        .releaseDate(form.getReleaseDate())
        .build();
   }
