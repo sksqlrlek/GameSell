@@ -53,8 +53,23 @@ dependencies {
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
 
+
 test {
-useJUnitPlatform()}
+useJUnitPlatform()
+}
+
+jar {
+  enabled = true
+}
+
+bootJar {
+  enabled = false
+  archiveClassifier = ''
+}
+
+artifacts {
+  archives jar
+}
 
 //jlink {
 //  imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
