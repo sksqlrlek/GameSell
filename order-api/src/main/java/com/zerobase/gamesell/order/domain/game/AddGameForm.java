@@ -18,6 +18,6 @@ public class AddGameForm {
   private String description;
   private Integer price;
   private Genre genre;
-  private Integer age;
+  private Integer contentRating;
   private LocalDate releaseDate;
 }

@@ -2,20 +2,19 @@ package com.zerobase.gamesell.order.config;
 
 import com.user.gamedomain.config.JwtAuthenticationProvider;
 import com.user.gamedomain.util.Aes256Util;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@RequiredArgsConstructor
 public class JwtConfig {
 
-  private final Aes256Util aes256Util;
+  private final Aes256Util aes256Provider;
 
-  public JwtConfig(Aes256Util aes256Util) {
-    this.aes256Util = aes256Util;
-  }
 
   @Bean
-  public JwtAuthenticationProvider jwtAuthenticationProvider() {
+  public JwtAuthenticationProvider jwtAuthenticationProvider(Aes256Util aes256Util) {
     return new JwtAuthenticationProvider(aes256Util);
   }
 }

@@ -28,7 +28,7 @@ public class GameService {
     game.setDescription(form.getDescription());
     game.setPrice(form.getPrice());
     game.setGenre(form.getGenre());
-    game.setAge(form.getAge());
+    game.setContentRating(form.getContentRating());
     game.setReleaseDate(form.getReleaseDate());
 
     return game;

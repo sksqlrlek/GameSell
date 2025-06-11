@@ -20,7 +20,7 @@ public class GameDto {
   private String description;
   private Integer price;
   private Genre genre;
-  private Integer age;
+  private Integer contentRating;
   private LocalDate releaseDate;
 
   public static GameDto from(Game game) {
@@ -30,7 +30,7 @@ public class GameDto {
         .description(game.getDescription())
         .price(game.getPrice())
         .genre(game.getGenre())
-        .age(game.getAge())
+        .contentRating(game.getContentRating())
         .releaseDate(game.getReleaseDate())
         .build();
   }
