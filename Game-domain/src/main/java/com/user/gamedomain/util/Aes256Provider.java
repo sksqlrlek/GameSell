@@ -11,17 +11,17 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class Aes256Util {
+public class Aes256Provider {
 
   private final String alg;
   private final String KEY;
   private final String IV;
 
-  public Aes256Util(@Value("${aes256.alg}") String alg,
+  public Aes256Provider(@Value("${aes256.alg}") String alg,
       @Value("${aes256.key}") String KEY) {
     this.alg = alg;
     this.KEY = KEY;
-    this.IV = KEY.substring(0,16);
+    this.IV = KEY.substring(0, 16);
   }
 
   public String encrypt(String text) {

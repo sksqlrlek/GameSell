@@ -44,8 +44,8 @@ public class User extends BaseEntity {
   @Enumerated(EnumType.STRING)
   private UserType role;
 
-  private LocalDateTime verifyExpiredAt;
-  private String verificationCode;
+  //  private LocalDateTime verifyExpiredAt;
+//  private String verificationCode;
   private LocalDateTime verifiedAt;
 
   public static User from(SignUpForm form) {

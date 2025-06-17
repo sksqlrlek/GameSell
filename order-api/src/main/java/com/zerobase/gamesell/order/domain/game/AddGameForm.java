@@ -14,10 +14,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddGameForm {
+
   private String title;
   private String description;
   private Integer price;
   private Genre genre;
-  private Integer age;
+  private Integer contentRating;
   private LocalDate releaseDate;
 }

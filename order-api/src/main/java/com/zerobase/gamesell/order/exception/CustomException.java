@@ -4,7 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 
 @Getter
-public class CustomException extends RuntimeException{
+public class CustomException extends RuntimeException {
+
   private final ErrorCode errorCode;
   private final int status;
   private static final ObjectMapper mapper = new ObjectMapper();

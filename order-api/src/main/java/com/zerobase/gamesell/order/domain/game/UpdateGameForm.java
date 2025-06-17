@@ -13,11 +13,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateGameForm {
-    private Long id;
-    private String title;
-    private String description;
-    private Integer price;
-    private Genre genre;
-    private Integer age;
-    private LocalDate releaseDate;
+
+  private Long id;
+  private String title;
+  private String description;
+  private Integer price;
+  private Genre genre;
+  private Integer contentRating;
+  private LocalDate releaseDate;
 }
