@@ -7,6 +7,7 @@ import com.zerobase.gamesell.order.domain.repository.GameSearchRepository;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,13 +25,13 @@ public class GameSearchService {
         Page<GameDocument> result;
 
         // 제목 + 장르 검색
-        if (keyword != null && !keyword.isBlank() && genre != null && !genre.isBlank()) {
+        if (StringUtils.isNotBlank(keyword) && StringUtils.isNotBlank(genre)) {
             result = gameSearchRepository.findByTitleContainingAndGenre(keyword, genre.toUpperCase(), pageable);
         } // 장르만 검색
-        else if (genre != null && !genre.isBlank()) {
+        else if (StringUtils.isNotBlank(genre)) {
             result = gameSearchRepository.findByGenre(genre.toUpperCase(), pageable);
         } // 제목만 검색
-        else if (keyword != null && !keyword.isBlank()) {
+        else if (StringUtils.isNotBlank(keyword)) {
             result = gameSearchRepository.findByTitleContaining(keyword, pageable);
         } // 아무 파라미터도 없으면 전체 검색
         else {
