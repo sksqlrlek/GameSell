@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class GameIndexingService {
 
-  private final GameSearchRepository gameSearchRepository;
+    private final GameSearchRepository gameSearchRepository;
 
-  public void indexGame(Game game) {
-    gameSearchRepository.save(GameDocument.from(game));
-  }
+    public void indexGame(Game game) {
+        gameSearchRepository.save(GameDocument.from(game));
+    }
 
 }
