@@ -21,6 +21,7 @@ public class UserService {
   }
 
   public Optional<User> findByIdAndEmail(Long id, String email) {
+
     return userRepository.findById(id).stream().filter(user -> user.getEmail()
         .equals(email)).findFirst();
   }

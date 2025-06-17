@@ -1,8 +1,10 @@
 package com.zerobase.gamesell.order.domain.redis;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.zerobase.gamesell.order.domain.game.AddGameCartForm;
-import com.zerobase.gamesell.order.domain.model.Game;
-import jakarta.persistence.Id;
+import com.zerobase.gamesell.order.domain.redis.Cart.Game;
+import org.springframework.data.annotation.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,31 +19,36 @@ import java.util.List;
 @NoArgsConstructor
 @RedisHash("cart")
 public class Cart {
-    @Id
-    private Long userId;
 
-    private List<Game> games = new ArrayList<>();
-    private LocalDateTime createdAt = LocalDateTime.now();
+  @Id
+  private Long userId;
+  @JsonDeserialize(contentAs = Cart.Game.class)
+  private List<Game> games = new ArrayList<>();
+  private LocalDateTime createdAt = LocalDateTime.now();
 
-    @Data
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class Game {
-        private Long id;
-        private Long sellerId;
-        private String title;
-        private Integer price;
-        private Integer contentRating;
+  @Data
+  @Builder
+  @NoArgsConstructor
+  @AllArgsConstructor
+  public static class Game {
 
-        public static Game from(AddGameCartForm form) {
-            return Game.builder()
-                    .id(form.getId())
-                    .sellerId(form.getSellerId())
-                    .title(form.getTitle())
-                    .price(form.getPrice())
-                    .contentRating(form.getContentRating())
-                    .build();
-        }
+    @JsonProperty("id")
+    private Long id;
+
+    @JsonProperty("title")
+    private String title;
+    @JsonProperty("price")
+    private Integer price;
+    @JsonProperty("contentRating")
+    private Integer contentRating;
+
+    public static Game from(AddGameCartForm form) {
+      return Game.builder()
+          .id(form.getId())
+          .title(form.getTitle())
+          .price(form.getPrice())
+          .contentRating(form.getContentRating())
+          .build();
     }
+  }
 }

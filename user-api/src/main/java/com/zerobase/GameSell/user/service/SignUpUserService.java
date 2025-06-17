@@ -31,25 +31,28 @@ public class SignUpUserService {
         .isPresent();
   }
 
-  @Transactional
-  public void verifyEmail(String email, String code) {
-    User user = userRepository.findByEmail(email.toLowerCase(Locale.ROOT))
-        .orElseThrow(() -> new UserException(NOT_FOUND_USER));
-    if (user.getVerifiedAt() != null) {
-      throw new UserException(ALREADY_VERIFY);
-    } else if (!user.getVerificationCode().equals(code)) {
-      throw new UserException(WRONG_VERIFICATION);
-    } else if (user.getVerifyExpiredAt().isBefore(LocalDateTime.now())) {
-      throw new UserException(EXPIRE_CODE);
-    }
-    user.setVerifiedAt(LocalDateTime.now());
+  public void saveUser(User user) {
+    userRepository.save(user);
   }
-
-  @Transactional
-  public LocalDateTime changeUserVerifyExpiredDateTime(Long userId, String verificationCode) {
-    User user = userRepository.findById(userId).orElseThrow(() -> new UserException(NOT_FOUND_USER));
-    user.setVerificationCode(verificationCode);
-    user.setVerifyExpiredAt(LocalDateTime.now().plusDays(1));
-    return user.getVerifyExpiredAt();
-  }
+//  @Transactional
+//  public void verifyEmail(String email, String code) {
+//    User user = userRepository.findByEmail(email.toLowerCase(Locale.ROOT))
+//        .orElseThrow(() -> new UserException(NOT_FOUND_USER));
+//    if (user.getVerifiedAt() != null) {
+//      throw new UserException(ALREADY_VERIFY);
+//    } else if (!user.getVerificationCode().equals(code)) {
+//      throw new UserException(WRONG_VERIFICATION);
+//    } else if (user.getVerifyExpiredAt().isBefore(LocalDateTime.now())) {
+//      throw new UserException(EXPIRE_CODE);
+//    }
+//    user.setVerifiedAt(LocalDateTime.now());
+//  }
+//
+//  @Transactional
+//  public LocalDateTime changeUserVerifyExpiredDateTime(Long userId, String verificationCode) {
+//    User user = userRepository.findById(userId).orElseThrow(() -> new UserException(NOT_FOUND_USER));
+//    user.setVerificationCode(verificationCode);
+//    user.setVerifyExpiredAt(LocalDateTime.now().plusDays(1));
+//    return user.getVerifyExpiredAt();
+//  }
 }

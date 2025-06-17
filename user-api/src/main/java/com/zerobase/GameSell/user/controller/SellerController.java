@@ -3,7 +3,7 @@ package com.zerobase.GameSell.user.controller;
 import static com.zerobase.GameSell.user.exception.ErrorCode.NOT_FOUND_USER;
 
 import com.user.gamedomain.config.JwtAuthenticationProvider;
-import com.user.gamedomain.domain.Dto.SellerDto;
+import com.user.gamedomain.domain.dto.SellerDto;
 import com.user.gamedomain.domain.common.UserVo;
 import com.zerobase.GameSell.user.domain.model.Seller;
 import com.zerobase.GameSell.user.domain.repository.SellerDtoMapper;

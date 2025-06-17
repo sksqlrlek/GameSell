@@ -18,39 +18,44 @@ import static com.zerobase.gamesell.order.exception.ErrorCode.GAME_PRICE_CHANGED
 @Slf4j
 @RequiredArgsConstructor
 public class CartService {
-    private final RedisClient redisClient;
 
-    public Cart getCart(Long userId) {
-        Cart cart = redisClient.get(userId, Cart.class);
-        return cart != null ? cart : new Cart();
+  private final RedisClient redisClient;
+
+  public Cart getCart(Long userId) {
+    Cart cart = redisClient.get(userId, Cart.class);
+    if (cart == null) {
+      cart = new Cart();
+      cart.setUserId(userId);
+    }
+    return cart;
+  }
+
+  public Cart putCart(Long userId, Cart cart) {
+    cart.setUserId(userId);
+    redisClient.put(userId, cart);
+    return cart;
+  }
+
+  public Cart addCart(Long userId, AddGameCartForm form) {
+
+    Cart cart = redisClient.get(userId, Cart.class);
+    if (cart == null) {
+      cart = new Cart();
+      cart.setUserId(userId);
     }
 
-    public Cart putCart(Long userId, Cart cart) {
-        redisClient.put(userId, cart);
-        return cart;
+    // 같은 게임이 이미 있는 경우
+    if (cart.getGames().stream()
+        .anyMatch(game -> game.getId().equals(form.getId()))) {
+      throw new CustomException(ALREADY_IN_CART);
     }
+    Cart.Game game = Cart.Game.from(form);
+    cart.getGames().add(game);
+    redisClient.put(userId, cart);
+    return cart;
+  }
 
-    public Cart addCart(Long userId, AddGameCartForm form) {
-
-        Cart cart = redisClient.get(userId, Cart.class);
-        if (cart == null) {
-            cart = new Cart();
-            cart.setUserId(userId);
-        }
-
-        // 같은 게임이 이미 있는 경우
-        Optional<Cart.Game> gameOptional = cart.getGames().stream()
-                .filter(games1 -> games1.getId().equals(form.getId()))
-                .findFirst();
-
-        if(gameOptional.isPresent()) {
-            throw new CustomException(ALREADY_IN_CART);
-
-        } else {
-            Cart.Game game = Cart.Game.from(form);
-            cart.getGames().add(game);
-        }
-        redisClient.put(userId, cart);
-        return cart;
-    }
+  public void clearCart(Long userId) {
+    redisClient.delete(userId);
+  }
 }

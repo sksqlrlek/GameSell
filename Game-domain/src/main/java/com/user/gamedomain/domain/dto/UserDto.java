@@ -1,4 +1,4 @@
-package com.user.gamedomain.domain.Dto;
+package com.user.gamedomain.domain.dto;
 
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;

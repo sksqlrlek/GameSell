@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class GameService {
+
   private final GameRepository gameRepository;
 
   @Transactional
@@ -23,7 +24,7 @@ public class GameService {
   @Transactional
   public Game updateGame(Long sellerId, UpdateGameForm form) {
     Game game = gameRepository.findBySellerIdAndId(sellerId, form.getId())
-            .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_GAME));
+        .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_GAME));
     game.setTitle(form.getTitle());
     game.setDescription(form.getDescription());
     game.setPrice(form.getPrice());
@@ -37,7 +38,7 @@ public class GameService {
   @Transactional
   public void deleteGame(Long sellerId, Long gameId) {
     Game game = gameRepository.findBySellerIdAndId(sellerId, gameId)
-            .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_GAME));
+        .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_GAME));
     gameRepository.delete(game);
   }
 }

@@ -25,7 +25,7 @@ import org.hibernate.envers.Audited;
 @AllArgsConstructor
 @Audited
 @AuditOverride(forClass = BaseEntity.class)
-public class Game extends BaseEntity{
+public class Game extends BaseEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,14 +54,14 @@ public class Game extends BaseEntity{
   private LocalDate releaseDate;
 
   public static Game of(Long sellerId, AddGameForm form) {
-   return Game.builder().sellerId(sellerId)
-       .title(form.getTitle())
-       .description(form.getDescription())
-       .price(form.getPrice())
-       .genre(form.getGenre())
-       .contentRating(form.getContentRating())
-       .releaseDate(form.getReleaseDate())
-       .build();
+    return Game.builder().sellerId(sellerId)
+        .title(form.getTitle())
+        .description(form.getDescription())
+        .price(form.getPrice())
+        .genre(form.getGenre())
+        .contentRating(form.getContentRating())
+        .releaseDate(form.getReleaseDate())
+        .build();
   }
 
 }

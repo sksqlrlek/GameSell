@@ -23,9 +23,9 @@ public class SignUpController {
     return ResponseEntity.ok(signUpApplication.userSignUp(form));
   }
 
-  @GetMapping("/verify/user")
-  public ResponseEntity<String> verifyCustomer(String email, String code) {
-    signUpApplication.userVerify(email, code);
-    return ResponseEntity.ok("인증이 완료되었습니다.");
-  }
+//  @GetMapping("/verify/user")
+//  public ResponseEntity<String> verifyCustomer(String email, String code) {
+//    signUpApplication.userVerify(email, code);
+//    return ResponseEntity.ok("인증이 완료되었습니다.");
+//  }
 }

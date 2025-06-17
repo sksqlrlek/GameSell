@@ -1,6 +1,6 @@
 package com.zerobase.GameSell.user.domain.repository;
 
-import com.user.gamedomain.domain.Dto.UserDto;
+import com.user.gamedomain.domain.dto.UserDto;
 import com.zerobase.GameSell.user.domain.model.User;
 
 public class UserDtoMapper {

@@ -1,9 +1,9 @@
 plugins {
-  id 'org.springframework.boot' version '3.3.2'
-  id 'io.spring.dependency-management' version '1.1.3'
-  id 'java'
-  id 'application'
-  id 'org.javamodularity.moduleplugin' version '1.8.12'
+    id 'org.springframework.boot' version '3.3.2'
+    id 'io.spring.dependency-management' version '1.1.3'
+    id 'java'
+    id 'application'
+    id 'org.javamodularity.moduleplugin' version '1.8.12'
 //  id 'org.openjfx.javafxplugin' version '0.0.13'
 //  id 'org.beryx.jlink' version '2.25.0'
 }
@@ -12,24 +12,26 @@ group 'com.zerobase.GameSell'
 version '1.0-SNAPSHOT'
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
 ext {
-  junitVersion = '5.10.2'
-  set('springCloudVersion',"2023.0.1")
+    junitVersion = '5.10.2'
+    set('springCloudVersion', "2023.0.1")
 }
 
 sourceCompatibility = '17'
 targetCompatibility = '17'
 
 tasks.withType(JavaCompile) {
-  options.encoding = 'UTF-8'
+    options.encoding = 'UTF-8'
+    options.compilerArgs << "-parameters"
+
 }
 
 application {
 //  mainModule = 'com.zerobase.gamesell.orderapi'
-  mainClass = 'com.zerobase.gamesell.orderapi.HelloApplication'
+    mainClass = 'com.zerobase.gamesell.orderapi.HelloApplication'
 }
 
 //javafx {
@@ -39,50 +41,63 @@ application {
 
 dependencies {
 
-  implementation project(path: ":Game-domain", configuration: "default")
+    implementation project(path: ":Game-domain", configuration: "default")
 
-  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-  implementation 'org.springframework.boot:spring-boot-starter-web'
-  implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-  implementation 'org.springframework.boot:spring-boot-starter:3.0.0'
-  implementation 'org.springframework.data:spring-data-envers'
-  implementation 'mysql:mysql-connector-java:8.0.33'
-  implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.boot:spring-boot-starter:3.0.0'
+    implementation 'org.springframework.data:spring-data-envers'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
 
-  // redis
-  implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-  testImplementation ('it.ozimov:embedded-redis:0.7.2') {
-    exclude group: "org.slf4j", module: "slf4j-simple"
-  }
+    // redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    testImplementation('it.ozimov:embedded-redis:0.7.2') {
+        exclude group: "org.slf4j", module: "slf4j-simple"
+    }
 
-  compileOnly 'org.projectlombok:lombok'
-  testImplementation 'com.h2database:h2'
-  runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'com.sun.xml.bind:jaxb-impl:2.3.1'
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
+    compileOnly 'org.projectlombok:lombok'
+    testImplementation 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
 
-  implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
 
-  annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 
-  testImplementation 'org.springframework.boot:spring-boot-starter-test'
-  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-  testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.1'
+    implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.17.1'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.1'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+
 }
 
 dependencyManagement {
-  imports {
-    mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-  }
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 tasks.named('test') {
-  useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 
 test {
-useJUnitPlatform()}
+    useJUnitPlatform()
+}
 
 //jlink {
 //  imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")

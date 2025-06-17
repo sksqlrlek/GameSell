@@ -15,6 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GameDto {
+
   private Long id;
   private String title;
   private String description;

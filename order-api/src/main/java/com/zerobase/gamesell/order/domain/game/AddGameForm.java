@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddGameForm {
+
   private String title;
   private String description;
   private Integer price;

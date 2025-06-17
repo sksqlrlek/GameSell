@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddGameCartForm {
-    private Long id;
-    private Long sellerId;
-    private String title;
-    private Integer price;
-    private Integer contentRating;
+
+  private Long id;
+  private String title;
+  private Integer price;
+  private Integer contentRating;
 
 }
