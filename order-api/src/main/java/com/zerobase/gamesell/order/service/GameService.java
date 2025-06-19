@@ -15,10 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class GameService {
 
   private final GameRepository gameRepository;
+  private final GameIndexingService gameIndexingService;
 
   @Transactional
   public Game addGame(Long sellerId, AddGameForm form) {
-    return gameRepository.save(Game.of(sellerId, form));
+    Game game = gameRepository.save(Game.of(sellerId, form));
+    gameIndexingService.indexGame(game);
+    return game;
   }
 
   @Transactional
